@@ -9,13 +9,13 @@
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = import nixpkgs { inherit system; };
       in {
-        packages.debug-h = pkgs.stdenv.mkDerivation {
-          name = "debug-h";
+        packages.cp-tools = pkgs.stdenv.mkDerivation {
+          name = "cp-tools";
           version = "1.0";
           src = self;
           installPhase = ''
             mkdir -p $out/include/cp-tools
-            cp debug.h $out/include/cp-tools/debug.h
+            cp src/* $out/include/cp-tools/
           '';
           meta = {
             description =
@@ -23,6 +23,6 @@
             license = pkgs.lib.licenses.mit;
           };
         };
-        defaultPackage = self.packages.${system}.debug-h;
+        defaultPackage = self.packages.${system}.cp-tools;
       });
 }
